@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { toastify } from "../../utils/toastify/toastify";
+import { useNavigate } from "react-router-dom";
+import { loginService } from "../../services/services";
 
 export default function Login() {
+    const navigate = useNavigate();
+
     const [userData, setUserData] = useState({
         username: "",
         password: "",
@@ -14,10 +18,21 @@ export default function Login() {
         }));
     };
 
-    const submit = () => {
+    const submit = async () => {
         if (!userData.username || !userData.password) {
             toastify("Please fill the fields!", "error", 2500);
             return;
+        }
+
+        try {
+            const { data } = await loginService(userData);
+            toastify("Sign in successfully" , 'success' , 2000);
+            localStorage.setItem('access-token' , data?.accessToken);
+            localStorage.setItem('refresh-token' , data?.refreshToken);
+            navigate('/');
+        }
+        catch (error) {
+            toastify(error.message , 'error' , 2500);
         }
     };
 
