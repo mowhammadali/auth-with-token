@@ -50,7 +50,7 @@ const products = [
 
 // Helper function to generate tokens
 function generateAccessToken(user) {
-    return jwt.sign(user, ACCESS_TOKEN_SECRET, { expiresIn: "1m" });
+    return jwt.sign(user, ACCESS_TOKEN_SECRET, { expiresIn: "2m" });
 }
 
 function generateRefreshToken(user) {

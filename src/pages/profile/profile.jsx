@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export default function Products() {
+export default function profile() {
     return (
         <div>
-            <NavLink to="/profile">Profile</NavLink>
+            <NavLink to="/">Products</NavLink>
         </div>
     );
 }
