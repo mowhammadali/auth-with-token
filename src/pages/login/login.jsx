@@ -90,7 +90,7 @@ export default function Login() {
                         />
                     </label>
                     <button
-                        className="btn btn-active btn-accent w-full"
+                        className="btn btn-active btn-primary w-full"
                         onClick={submit}
                     >
                         Login

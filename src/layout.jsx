@@ -3,6 +3,7 @@ import { verifyUserService } from "./services/services";
 import { Outlet } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "./context/auth-context";
+import Loader from "./components/common/loader/loader";
 
 export default function Layout() {
     const { setIsAuthenticated } = useContext(AuthContext);
@@ -18,7 +19,9 @@ export default function Layout() {
             setErrorMessage(error.message);
             setIsAuthenticated(false);
         } finally {
-            setLoading(false);
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
         }
     };
 
@@ -27,7 +30,7 @@ export default function Layout() {
     }, []);
 
     if (loading) {
-        return <h1>loading</h1>;
+        return <Loader />;
     }
 
     if (!errorMessage) {

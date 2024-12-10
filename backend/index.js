@@ -19,38 +19,38 @@ const products = [
         id: 1,
         name: "Product 1",
         price: 100,
-        image: "https://via.placeholder.com/150",
+        image: "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
     },
     {
         id: 2,
         name: "Product 2",
         price: 200,
-        image: "https://via.placeholder.com/150",
+        image: "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg",
     },
     {
         id: 3,
         name: "Product 2",
         price: 300,
-        image: "https://via.placeholder.com/150",
+        image: "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg",
     },
     {
         id: 4,
         name: "Product 2",
         price: 150,
-        image: "https://via.placeholder.com/150",
+        image: "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg",
     },
     {
         id: 5,
         name: "Product 2",
         price: 240,
-        image: "https://via.placeholder.com/150",
+        image: "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg",
     },
     // add more products as needed
 ];
 
 // Helper function to generate tokens
 function generateAccessToken(user) {
-    return jwt.sign(user, ACCESS_TOKEN_SECRET, { expiresIn: "2m" });
+    return jwt.sign(user, ACCESS_TOKEN_SECRET, { expiresIn: "8m" });
 }
 
 function generateRefreshToken(user) {

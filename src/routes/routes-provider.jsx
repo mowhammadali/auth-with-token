@@ -11,14 +11,10 @@ export default function RoutesProvider() {
         <Routes>
             <Route path="/login" element={<Login />} />
             <Route element={<Layout />}>
-                <Route
-                    path="/"
-                    element={<PrivateLayout element={<Products />} />}
-                />
-                <Route
-                    path="/profile"
-                    element={<PrivateLayout element={<Profile />} />}
-                />
+                <Route element={<PrivateLayout />}>
+                    <Route path="/" element={<Products />} />
+                    <Route path="profile" element={<Profile />} />
+                </Route>
             </Route>
         </Routes>
     );
