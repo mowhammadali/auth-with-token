@@ -10,7 +10,8 @@ export default function Navbar() {
 
     const logout = useCallback(async () => {
         try {
-            await logoutService();
+            const token = localStorage.getItem('refresh-token');
+            await logoutService({token});
         }
         catch (error) {}
         finally {

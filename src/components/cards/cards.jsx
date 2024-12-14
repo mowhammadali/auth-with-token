@@ -40,7 +40,7 @@ export default function Cards() {
                 <Alert message={errorMessage} />
             ) : (
                 products.map((product) => (
-                    <Card key={product.id} {...product} />
+                    <Card key={product?.id} {...product} />
                 ))
             )}
         </div>

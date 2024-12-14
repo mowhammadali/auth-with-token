@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(cors({ origin: "http://localhost:3000" }));
 
 // Static User and Product Data
+const invalidatedRefreshTokens = [];
 const user = { id: 1, name: "admin", email: "admin@gmail.com" };
 const products = [
     {
@@ -50,11 +51,11 @@ const products = [
 
 // Helper function to generate tokens
 function generateAccessToken(user) {
-    return jwt.sign(user, ACCESS_TOKEN_SECRET, { expiresIn: "8m" });
+    return jwt.sign(user, ACCESS_TOKEN_SECRET, { expiresIn: "12s" });
 }
 
 function generateRefreshToken(user) {
-    return jwt.sign(user, REFRESH_TOKEN_SECRET, { expiresIn: "10m" });
+    return jwt.sign(user, REFRESH_TOKEN_SECRET, { expiresIn: "25s" });
 }
 
 // Login API
@@ -91,8 +92,14 @@ function authenticateToken(req, res, next) {
         return res.status(401).json({ message: "Access token is required" });
 
     jwt.verify(token, ACCESS_TOKEN_SECRET, (err, user) => {
-        if (err)
+        if (err) {
+            if (err.name === "TokenExpiredError") {
+                return res
+                    .status(401)
+                    .json({ message: "Access token expired" });
+            }
             return res.status(403).json({ message: "Invalid access token" });
+        }
         req.user = user;
         next();
     });

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
+import Loader from "./components/common/loader/loader";
 import { verifyUserService } from "./services/services";
 import { Outlet } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "./context/auth-context";
-import Loader from "./components/common/loader/loader";
 
 export default function Layout() {
     const { setIsAuthenticated } = useContext(AuthContext);
@@ -12,7 +12,8 @@ export default function Layout() {
 
     const verify = async () => {
         try {
-            await verifyUserService();
+            const accessToken = localStorage.getItem("access-token");
+            await verifyUserService(accessToken);
             setIsAuthenticated(true);
             setErrorMessage("");
         } catch (error) {
