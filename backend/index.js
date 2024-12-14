@@ -13,37 +13,37 @@ app.use(bodyParser.json());
 app.use(cors({ origin: "http://localhost:3000" }));
 
 // Static User and Product Data
-const user = { id: 1, name: "admin", email: "admin@example.com" };
+const user = { id: 1, name: "admin", email: "admin@gmail.com" };
 const products = [
     {
         id: 1,
         name: "Product 1",
         price: 100,
-        image: "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
+        image: "product-1",
     },
     {
         id: 2,
         name: "Product 2",
         price: 200,
-        image: "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg",
+        image: "product-2",
     },
     {
         id: 3,
         name: "Product 2",
         price: 300,
-        image: "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg",
+        image: "product-3",
     },
     {
         id: 4,
         name: "Product 2",
         price: 150,
-        image: "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg",
+        image: "product-4",
     },
     {
         id: 5,
         name: "Product 2",
         price: 240,
-        image: "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg",
+        image: "product-5",
     },
     // add more products as needed
 ];

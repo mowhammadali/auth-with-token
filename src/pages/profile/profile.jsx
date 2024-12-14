@@ -1,10 +1,12 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import Navbar from "../../components/common/navbar/navbar";
+import Content from "../../components/content/content";
 
 export default function profile() {
     return (
         <div>
-            <NavLink to="/">Products</NavLink>
+            <Navbar />
+            <Content />            
         </div>
     );
 }

@@ -5,6 +5,7 @@ import Layout from "../layout";
 import PrivateLayout from "./private-layout";
 import Products from "../pages/products/products";
 import Profile from "../pages/profile/profile";
+import NotFound from "../pages/not-found/not-found";
 
 export default function RoutesProvider() {
     return (
@@ -14,6 +15,7 @@ export default function RoutesProvider() {
                 <Route element={<PrivateLayout />}>
                     <Route path="/" element={<Products />} />
                     <Route path="profile" element={<Profile />} />
+                    <Route path="*" element={<NotFound />} />
                 </Route>
             </Route>
         </Routes>

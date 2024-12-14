@@ -5,12 +5,11 @@ const override = {
     display: "block",
     width: "fit-content",
     margin: "100px auto",
-    borderColor: "red",
 };
 
 export default function Loader() {
     let [loading] = useState(true);
-    let [color] = useState("#6366f1");
+    let [color] = useState("#334155");
 
     return (
         <ScaleLoader 
@@ -18,8 +17,6 @@ export default function Loader() {
             loading={loading}
             cssOverride={override}
             size={100}
-            aria-label="Loading Spinner"
-            data-testid="loader"
         />
     );
 }
