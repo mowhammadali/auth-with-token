@@ -13,48 +13,49 @@ app.use(bodyParser.json());
 app.use(cors({ origin: "http://localhost:3000" }));
 
 // Static User and Product Data
-const user = { id: 1, name: "admin", email: "admin@example.com" };
+const invalidatedRefreshTokens = [];
+const user = { id: 1, name: "admin", email: "admin@gmail.com" };
 const products = [
     {
         id: 1,
         name: "Product 1",
         price: 100,
-        image: "https://via.placeholder.com/150",
+        image: "product-1",
     },
     {
         id: 2,
         name: "Product 2",
         price: 200,
-        image: "https://via.placeholder.com/150",
+        image: "product-2",
     },
     {
         id: 3,
         name: "Product 2",
         price: 300,
-        image: "https://via.placeholder.com/150",
+        image: "product-3",
     },
     {
         id: 4,
         name: "Product 2",
         price: 150,
-        image: "https://via.placeholder.com/150",
+        image: "product-4",
     },
     {
         id: 5,
         name: "Product 2",
         price: 240,
-        image: "https://via.placeholder.com/150",
+        image: "product-5",
     },
     // add more products as needed
 ];
 
 // Helper function to generate tokens
 function generateAccessToken(user) {
-    return jwt.sign(user, ACCESS_TOKEN_SECRET, { expiresIn: "1m" });
+    return jwt.sign(user, ACCESS_TOKEN_SECRET, { expiresIn: "12s" });
 }
 
 function generateRefreshToken(user) {
-    return jwt.sign(user, REFRESH_TOKEN_SECRET, { expiresIn: "10m" });
+    return jwt.sign(user, REFRESH_TOKEN_SECRET, { expiresIn: "25s" });
 }
 
 // Login API
@@ -91,8 +92,14 @@ function authenticateToken(req, res, next) {
         return res.status(401).json({ message: "Access token is required" });
 
     jwt.verify(token, ACCESS_TOKEN_SECRET, (err, user) => {
-        if (err)
+        if (err) {
+            if (err.name === "TokenExpiredError") {
+                return res
+                    .status(401)
+                    .json({ message: "Access token expired" });
+            }
             return res.status(403).json({ message: "Invalid access token" });
+        }
         req.user = user;
         next();
     });

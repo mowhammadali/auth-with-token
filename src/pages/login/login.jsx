@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState , useContext } from "react";
 import { toastify } from "../../utils/toastify/toastify";
 import { useNavigate } from "react-router-dom";
 import { loginService } from "../../services/services";
+import { AuthContext } from "../../context/auth-context";
 
 export default function Login() {
     const navigate = useNavigate();
+    const { setIsAuthenticated } = useContext(AuthContext);
 
     const [userData, setUserData] = useState({
         username: "",
@@ -25,7 +27,8 @@ export default function Login() {
         }
 
         try {
-            const { data } = await loginService(userData);
+            const { data } = await loginService(userData); 
+            setIsAuthenticated(true);
             toastify("Sign in successfully" , 'success' , 2000);
             localStorage.setItem('access-token' , data?.accessToken);
             localStorage.setItem('refresh-token' , data?.refreshToken);
@@ -58,8 +61,9 @@ export default function Login() {
                             value={userData.username}
                             className="grow"
                             name="username"
-                            placeholder="User name"
+                            placeholder="User name = admin"
                             onChange={(event) => updateUserDate(event.target)}
+                            onKeyDown={event => event.key === 'Enter' && submit()}
                         />
                     </label>
                     <label className="input input-bordered flex items-center gap-2">
@@ -78,14 +82,15 @@ export default function Login() {
                         <input
                             type="password"
                             className="grow"
-                            placeholder="password"
+                            placeholder="password = admin"
                             value={userData.password}
                             name="password"
                             onChange={(event) => updateUserDate(event.target)}
+                            onKeyDown={event => event.key === 'Enter' && submit()}
                         />
                     </label>
                     <button
-                        className="btn btn-active btn-accent w-full"
+                        className="btn btn-active btn-primary text-light rounded-xl w-full"
                         onClick={submit}
                     >
                         Login

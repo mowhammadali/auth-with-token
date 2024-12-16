@@ -1,12 +1,12 @@
 import React from "react";
 import Navbar from "../../components/common/navbar/navbar";
-import Cards from "../../components/cards/cards";
+import Content from "../../components/content/content";
 
-export default function Products() {
+export default function profile() {
     return (
         <div>
             <Navbar />
-            <Cards />
+            <Content />            
         </div>
     );
 }
